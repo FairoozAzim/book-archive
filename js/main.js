@@ -39,6 +39,7 @@ const displayBooks = (bookData, numberOfresult) => {
     number.innerText = numberOfresult;
     search(true);
     bookDisplay.innerHTML = '';
+    //if no result is found
     if (bookData.length === 0) {
         spinnerToggle(false);
         bookDisplay.innerHTML = `
@@ -51,12 +52,15 @@ const displayBooks = (bookData, numberOfresult) => {
                 //console.log(books.title);
                 return;
             }
+            //setting book cover
             let bookCoverUrl;
             if (!books.cover_i) {
-                bookCoverUrl = '../unnamed.png'
+                bookCoverUrl = '../images/unnamed.png'
             } else {
                 bookCoverUrl = `https://covers.openlibrary.org/b/id/${books.cover_i}-M.jpg`
             }
+
+            //setting author name 
             let authorName;
             if (!books.author_name) {
                 authorName = 'Unknown author'
@@ -65,13 +69,15 @@ const displayBooks = (bookData, numberOfresult) => {
                 authorName = books.author_name[0];
                 console.log(authorName);
             }
+
+            //setting publisher name
             let publisherName;
             if (!books.publisher) {
                 publisherName = 'Unknown'
             } else {
                 publisherName = books.publisher[0];
             }
-
+            //displaying books
             const bookDiv = document.createElement('div');
             bookDiv.classList.add('col');
             bookDiv.innerHTML = `
