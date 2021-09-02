@@ -28,27 +28,25 @@ const loadBooks = () => {
     const bookName = document.getElementById('book-name');
     fetch(`https://openlibrary.org/search.json?q=${bookName.value}`)
         .then(response => response.json())
-        .then(data => displayBooks(data.docs));
+        .then(data => displayBooks(data.docs, data.numFound));
     bookName.value = '';
 
 }
 
 //book result display
-const displayBooks = (bookData) => {
-
-    console.log(bookData.length);
+const displayBooks = (bookData, numberOfresult) => {
     const number = document.getElementById('number');
-    number.innerText = bookData.length;
+    number.innerText = numberOfresult;
     search(true);
     bookDisplay.innerHTML = '';
     if (bookData.length === 0) {
         spinnerToggle(false);
         bookDisplay.innerHTML = `
-      <h3 class="text-center">Search by your favorite book name or author's name.</h3>
+      <h3 class="text-center mx-auto">Search by your favorite book's name or author's name.</h3>
       `
     } else {
         bookData.forEach(books => {
-            console.log(books);
+            //console.log(books);
             if (books.title.length > 200) {
                 //console.log(books.title);
                 return;
@@ -67,6 +65,12 @@ const displayBooks = (bookData) => {
                 authorName = books.author_name[0];
                 console.log(authorName);
             }
+            let publisherName;
+            if (!books.publisher) {
+                publisherName = 'Unknown'
+            } else {
+                publisherName = books.publisher[0];
+            }
 
             const bookDiv = document.createElement('div');
             bookDiv.classList.add('col');
@@ -76,9 +80,10 @@ const displayBooks = (bookData) => {
                                 <img class="img-fluid text-center rounded" src="${bookCoverUrl}" alt="">
                             </div>
                             <div class="details">
-                                <h6 class="text-left">${books.title}</h6>
-                                <p class="text-left">By ${authorName}</p>
-                                <p class="text-left">Published in ${books.first_publish_year}</p>
+                                <h6 class="text-left"><span class="highlights">${books.title}</span></h6>
+                                <p class="text-left">By <span class="highlights">${authorName}</span></p>
+                                <p class="text-left">Published in <span class="highlights">${books.first_publish_year}</span></p>
+                                <p class="text-left">Publisher: <span class="highlights">${publisherName}</span></p>
                             </div>
                         </div>
                 `

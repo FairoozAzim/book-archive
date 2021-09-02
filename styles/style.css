@@ -1,7 +1,32 @@
 body {
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    background-color: #f7f1f0;
+}
+
+header {
+    background-image: url('../images/cover2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50vh;
+}
+
+.nav-color {
+    background-color: #c7a49d;
+}
+
+.nav-color a {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.btn-search {
+    border: 1px solid #c7a49d;
+    font-weight: 700;
+    font-size: 18px;
 }
 
 
@@ -11,6 +36,8 @@ body {
     width: 400px;
     /* height: 350px; */
     padding: 20px;
+    background-color: #c2938a;
+    color: white;
 }
 
 .book-details img {
@@ -20,4 +47,8 @@ body {
 
 .book-details .details {
     width: 100%;
+}
+
+.highlights {
+    font-weight: 700;
 }
