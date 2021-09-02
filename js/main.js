@@ -53,30 +53,13 @@ const displayBooks = (bookData, numberOfresult) => {
                 return;
             }
             //setting book cover
-            let bookCoverUrl;
-            if (!books.cover_i) {
-                bookCoverUrl = '../images/unnamed.png'
-            } else {
-                bookCoverUrl = `https://covers.openlibrary.org/b/id/${books.cover_i}-M.jpg`
-            }
+            const bookCoverUrl = (!books.cover_i) ? '../images/unnamed.png' : `https://covers.openlibrary.org/b/id/${books.cover_i}-M.jpg`;
 
             //setting author name 
-            let authorName;
-            if (!books.author_name) {
-                authorName = 'Unknown author'
-                    //console.log(authorName);
-            } else {
-                authorName = books.author_name[0];
-                console.log(authorName);
-            }
+            const authorName = (!books.author_name) ? 'Unknown author' : books.author_name[0];
 
             //setting publisher name
-            let publisherName;
-            if (!books.publisher) {
-                publisherName = 'Unknown'
-            } else {
-                publisherName = books.publisher[0];
-            }
+            const publisherName = (!books.publisher) ? 'Unknown' : books.publisher[0];
             //displaying books
             const bookDiv = document.createElement('div');
             bookDiv.classList.add('col');
