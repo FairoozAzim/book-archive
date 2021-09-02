@@ -14,7 +14,7 @@ header {
 }
 
 .nav-color {
-    background-color: #c7a49d;
+    background-color: #c28b80;
 }
 
 .nav-color a {
@@ -24,9 +24,10 @@ header {
 }
 
 .btn-search {
-    border: 1px solid #c7a49d;
+    background-color: #ca988e;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 22px;
+    color: white;
 }
 
 
@@ -36,7 +37,7 @@ header {
     width: 400px;
     /* height: 350px; */
     padding: 20px;
-    background-color: #c2938a;
+    background-color: #c28b80;
     color: white;
 }
 
