@@ -1,6 +1,7 @@
+//bookdisplay div
 const bookDisplay = document.getElementById('book-display');
-//show spinner
 
+//show spinner
 const spinnerToggle = display => {
     if (display) {
         document.getElementById('spinner').classList.remove('d-none');
@@ -11,7 +12,6 @@ const spinnerToggle = display => {
 }
 
 //search result number
-
 const search = show => {
     if (show) {
         document.getElementById('result-number').classList.remove('d-none');
@@ -20,24 +20,26 @@ const search = show => {
     }
 
 }
+
+//loading books from API
 const loadBooks = () => {
     spinnerToggle(true);
     search(false);
     const bookName = document.getElementById('book-name');
-    fetch(`http://openlibrary.org/search.json?q=${bookName.value}`)
+    fetch(`https://openlibrary.org/search.json?q=${bookName.value}`)
         .then(response => response.json())
         .then(data => displayBooks(data.docs));
     bookName.value = '';
 
 }
 
+//book result display
 const displayBooks = (bookData) => {
 
     console.log(bookData.length);
     const number = document.getElementById('number');
     number.innerText = bookData.length;
     search(true);
-
     bookDisplay.innerHTML = '';
     if (bookData.length === 0) {
         spinnerToggle(false);
@@ -46,8 +48,9 @@ const displayBooks = (bookData) => {
       `
     } else {
         bookData.forEach(books => {
+            console.log(books);
             if (books.title.length > 200) {
-                console.log(books.title);
+                //console.log(books.title);
                 return;
             }
             let bookCoverUrl;
@@ -56,15 +59,27 @@ const displayBooks = (bookData) => {
             } else {
                 bookCoverUrl = `https://covers.openlibrary.org/b/id/${books.cover_i}-M.jpg`
             }
+            let authorName;
+            if (!books.author_name) {
+                authorName = 'Unknown author'
+                    //console.log(authorName);
+            } else {
+                authorName = books.author_name[0];
+                console.log(authorName);
+            }
 
             const bookDiv = document.createElement('div');
-            bookDiv.classList.add('col-3')
+            bookDiv.classList.add('col');
             bookDiv.innerHTML = `
-            <div class=" book-details shadow-lg rounded p-2">
-                            <img class="img-fluid text-center" src="${bookCoverUrl}" alt="">
-                            <h6 class="text-center">${books.title}</h6>
-                            <p class="text-center">By ${books.author_name}</p>
-                            <p class="text-center">Published in 1990</p>
+            <div class="d-flex align-items-center justify-content-center book-details shadow-lg rounded me-2">
+                            <div class="me-3">
+                                <img class="img-fluid text-center rounded" src="${bookCoverUrl}" alt="">
+                            </div>
+                            <div class="details">
+                                <h6 class="text-left">${books.title}</h6>
+                                <p class="text-left">By ${authorName}</p>
+                                <p class="text-left">Published in ${books.first_publish_year}</p>
+                            </div>
                         </div>
                 `
             bookDisplay.appendChild(bookDiv);

@@ -8,16 +8,16 @@ body {
 /* book details */
 
 .book-details {
-    width: 300px;
-    height: 550px;
+    width: 400px;
+    /* height: 350px; */
+    padding: 20px;
 }
 
 .book-details img {
-    width: 250px;
-    height: 300px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    height: 200px;
+    width: 200px;
+}
+
+.book-details .details {
+    width: 100%;
 }
